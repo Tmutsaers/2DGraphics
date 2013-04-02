@@ -12,6 +12,8 @@ public class StopWatch extends JPanel implements MouseListener
 	private Shape secWijzer;
 	private Timer milisec;
 	private Timer sec;
+	private int graden = 0;
+	private boolean mode = true;   										//true is start, false is stop
 	
 	public static void main(String[] args)
 	{
@@ -34,24 +36,29 @@ public class StopWatch extends JPanel implements MouseListener
 		
 		frame.add(this);
 		
-		milisec = new Timer(1000/360,new ActionListener()
+		milisec = new Timer(1,new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				rotateMiliSec();
+				graden++;
+				if(graden == 360)
+				{
+					rotateSec();
+					graden = 0;
+				}
 				repaint();
 			}
 		});
-		sec = new Timer(1000,new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				rotateSec();
-				repaint();
-			}
-		});
+//		sec = new Timer(1000,new ActionListener()
+//		{
+//			public void actionPerformed(ActionEvent e)
+//			{
+//				rotateSec();
+//				repaint();
+//			}
+//		});
 		milisec.start();
-		sec.start();
 		addMouseListener(this);
 		
 		
@@ -113,24 +120,22 @@ public class StopWatch extends JPanel implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent event) 
 	{
-		if(event.getButton() == event.BUTTON1 && event.getClickCount() == 2)
-		{
-			frame.setTitle("Analog Stopwatch: Reset");
-			createSecWijzer();
-			createSecWijzer2();
-		}
-		if(event.getButton() == event.BUTTON3 && event.getClickCount() == 1)
-		{
-			milisec.stop();
-			sec.stop();
-			frame.setTitle("Analog Stopwatch: Stoppped");
-		}
-		if(event.getButton() == event.BUTTON3 && event.getClickCount() == 2)
-		{
-			frame.setTitle("Analog Stopwatch : resumed");
-			milisec.start();
-			sec.start();
-		}
+//		if(event.getButton() == event.BUTTON1 && event.getClickCount() == 2)
+//		{
+//			frame.setTitle("Analog Stopwatch: Reset");
+//			createSecWijzer();
+//			createSecWijzer2();
+//		}
+//		if(event.getButton() == event.BUTTON3 && event.getClickCount() == 1)
+//		{
+//			milisec.stop();
+//			frame.setTitle("Analog Stopwatch: Stoppped");
+//		}
+//		if(event.getButton() == event.BUTTON3 && event.getClickCount() == 2)
+//		{
+//			frame.setTitle("Analog Stopwatch : resumed");
+//			milisec.start();
+//		}
 		
 	}
 
@@ -147,8 +152,30 @@ public class StopWatch extends JPanel implements MouseListener
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mousePressed(MouseEvent event) 
+	{
+		if(event.getButton() == event.BUTTON1)
+		{	
+			if(mode == true)
+			{
+				frame.setTitle("Analog Stopwatch: Stoppped");
+				milisec.stop();
+				mode = false;
+			}
+			else
+			{
+				frame.setTitle("Analog Stopwatch : resumed");
+				milisec.start();
+				mode = true;
+			}
+		}
+		if(event.getButton() == event.BUTTON3)
+		{
+			frame.setTitle("Analog Stopwatch: Reset");
+			createSecWijzer();
+			createSecWijzer2();
+			graden = 0;
+		}
 		
 	}
 
