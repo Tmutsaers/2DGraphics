@@ -46,9 +46,17 @@ public class MiRe extends JPanel
 		Shape s2 = new Rectangle2D.Double(0,100,100,50);
 		g2.translate(400, 400);
 		g2.draw(s2);
-		Shape s3 = new Rectangle2D.Double(-200,-100,100,50);
+		
+		AffineTransform tx = new AffineTransform();
+		tx.setTransform(-1, 0, 0, 1, -150, -150);
+		
+		s2 = tx.createTransformedShape(s2);
 		g2.setColor(Color.GREEN);
-		g2.fill(s3);
+		g2.fill(s2);
+		
+//		Shape s3 = new Rectangle2D.Double(-200,-100,100,50);
+//		g2.setColor(Color.GREEN);
+//		g2.fill(s3);
 		
 	}
 }

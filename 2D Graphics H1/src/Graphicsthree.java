@@ -23,7 +23,7 @@ public class Graphicsthree
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setSize(500,500);
-		this.pane = new YingYang2();
+		this.pane = new YingYang();
 		frame.add(pane);
 
 		

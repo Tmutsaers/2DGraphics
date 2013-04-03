@@ -526,7 +526,7 @@ class pane3 extends JPanel implements MouseMotionListener,MouseListener
         				
         			}
         		}
-//                System.out.println(circles.size());
+//                System.out.println("Aantal cirkels: " + circles.size());
                 repaint();
 			}
 	
@@ -668,7 +668,7 @@ class cirkel extends Body
 	
 	public void update()
 	{
-		alpha -= 0.05f;
+		alpha -= 0.04f;
 		alpha = Math.max(0,alpha);
 	}
 	
